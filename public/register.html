@@ -117,12 +117,12 @@
       b.innerHTML = icon(show ? 'x' : 'eye', 17);
     }));
 
-    form.password.addEventListener('input', () => {
-      const s = strength(form.password.value);
+    form.elements.password.addEventListener('input', () => {
+      const s = strength(form.elements.password.value);
       const bar = qs('[data-strength]');
       bar.style.width = (s * 20) + '%';
       bar.style.background = COLORS[Math.max(0, s - 1)] || 'transparent';
-      qs('[data-strength-text]').textContent = form.password.value ? 'قدرت رمز عبور: ' + LABELS[Math.max(0, s - 1)] : 'قدرت رمز عبور: —';
+      qs('[data-strength-text]').textContent = form.elements.password.value ? 'قدرت رمز عبور: ' + LABELS[Math.max(0, s - 1)] : 'قدرت رمز عبور: —';
     });
 
     let allowRegistration = true;
@@ -147,13 +147,13 @@
       e.preventDefault();
       const btn = qs('button[type=submit]', form);
       qsa('[data-error]').forEach((el) => { el.classList.add('hide'); el.textContent = ''; });
-      if (form.password.value !== form.password2.value) {
+      if (form.elements.password.value !== form.elements.password2.value) {
         const err = qs('[data-error="password2"]');
         err.textContent = 'رمز عبور و تکرار آن یکسان نیستند.';
         err.classList.remove('hide');
         return;
       }
-      if (!/^[A-Za-z0-9][A-Za-z0-9_.\-]{2,31}$/.test(form.username.value.trim())) {
+      if (!/^[A-Za-z0-9][A-Za-z0-9_.\-]{2,31}$/.test(form.elements.username.value.trim())) {
         const err = qs('[data-error="username"]');
         err.textContent = 'نام کاربری باید ۳ تا ۳۲ کاراکتر انگلیسی باشد و با حرف یا عدد شروع شود.';
         err.classList.remove('hide');
@@ -164,10 +164,10 @@
         const res = await api('/api/auth/register', {
           method: 'POST',
           body: {
-            username: form.username.value.trim(),
-            display_name: form.display_name.value.trim(),
-            email: form.email.value.trim(),
-            password: form.password.value,
+            username: form.elements.username.value.trim(),
+            display_name: form.elements.display_name.value.trim(),
+            email: form.elements.email.value.trim(),
+            password: form.elements.password.value,
           },
         });
         toast('حساب شما ساخته شد! در حال انتقال به داشبورد...', 'ok');

@@ -44,8 +44,9 @@ function checkUrlSafety(url) {
   return { safe: true };
 }
 
-function createLink({ req, userId, url, alias, domainId, domain_id, title, note, password, expiresAt, clickLimit, tags }) {
+function createLink({ req, userId, url, target_url, alias, domainId, domain_id, title, note, password, expiresAt, clickLimit, tags }) {
   if (domainId === undefined || domainId === null) domainId = domain_id; // پشتیبانی از نام‌گذاری snake_case در API
+  if (!url && target_url) url = target_url; // پنل کاربری آدرس را با نام target_url می‌فرستد
   const norm = normalizeUrl(url);
   if (!norm || !norm.url) return { error: 'آدرس مقصد معتبر نیست. نمونه: https://example.com/page' };
   const safety = checkUrlSafety(norm.url);
@@ -158,8 +159,9 @@ router.patch('/:id', requireAuth, ownLink, (req, res) => {
   const link = req.link;
   const fields = [];
   const values = [];
-  if (req.body.target_url !== undefined) {
-    const norm = normalizeUrl(req.body.target_url);
+  const nextTarget = req.body.target_url !== undefined ? req.body.target_url : req.body.url;
+  if (nextTarget !== undefined) {
+    const norm = normalizeUrl(nextTarget);
     if (!norm || !norm.url) return res.status(400).json({ ok: false, error: 'آدرس مقصد معتبر نیست.' });
     fields.push('target_url = ?'); values.push(norm.url);
   }

@@ -264,11 +264,11 @@
       const btn = e.currentTarget;
       const d = L.serializeForm(form);
       if (!d.url || !d.url.trim()) return toast('آدرس مقصد را وارد کنید.', 'warn');
-      if (d.password === '' && form.password.value === '' && link) d.password_unchanged = true;
+      if (d.password === '' && form.elements.password.value === '' && link) d.password_unchanged = true;
       btnLoading(btn, true);
       try {
         const payload = {
-          target_url: d.url.trim(), alias: d.alias?.trim() || undefined, domain_id: Number(d.domain_id) || 0,
+          url: d.url.trim(), alias: d.alias?.trim() || undefined, domain_id: Number(d.domain_id) || 0,
           title: d.title, note: d.note, expires_at: d.expires || null, click_limit: d.click_limit || null,
           tags: d.tags, is_active: d.is_active,
         };
@@ -682,9 +682,9 @@ https://example.com/page-3"></textarea>
     qs('[data-settings-avatar]').innerHTML = avatarHtml(u, 56, true);
     qs('[data-settings-username]').textContent = '@' + u.username;
     const form = qs('[data-profile-form]');
-    form.display_name.value = u.display_name || '';
-    form.email.value = u.email || '';
-    form.bio.value = u.bio || '';
+    form.elements.display_name.value = u.display_name || '';
+    form.elements.email.value = u.email || '';
+    form.elements.bio.value = u.bio || '';
     qs('[data-api-key]').textContent = u.api_key || '—';
     qs('[data-account-info]').innerHTML = `
       <div class="flex-col" style="gap:10px">

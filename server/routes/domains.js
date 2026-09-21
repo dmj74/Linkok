@@ -35,17 +35,18 @@ router.get('/', requireAuth, (req, res) => {
 
 router.post('/', requireAuth, rateLimit({ windowMs: 60_000, max: 20 }), (req, res) => {
   const hostname = cleanHost(req.body.hostname);
+  if (!hostname) return res.status(400).json({ ok: false, error: 'نام دامنه را وارد کنید. نمونه: go.example.com' });
+  if (!isValidHostname(hostname)) return res.status(400).json({ ok: false, error: 'ساختار دامنه معتبر نیست. دامنه باید شامل پسوند باشد (مثال: short.example.com).' });
+  const mainHost = baseUrl(req).replace(/^https?:\/\//, '').split(':')[0];
+  if (hostname === mainHost.toLowerCase()) return res.status(400).json({ ok: false, error: 'دامنه اصلی سامانه را نمی‌توان اضافه کرد.' });
+  // ابتدا تکراری بودن بررسی می‌شود تا پیام دقیق‌تری به کاربر نشان داده شود
+  if (db.prepare('SELECT 1 FROM domains WHERE hostname = ?').get(hostname)) return res.status(409).json({ ok: false, error: 'این دامنه قبلاً ثبت شده است (توسط شما یا کاربر دیگر).' });
   const limits = limitsFor(req.user.plan);
   const count = db.prepare('SELECT COUNT(*) AS c FROM domains WHERE user_id = ?').get(req.user.id).c;
   const maxDomains = limits.domains || Number(getSetting('free_domains', '0'));
   if (count >= maxDomains) {
     return res.status(403).json({ ok: false, error: maxDomains ? `سهمیه دامنه پلن شما (${maxDomains} دامنه) تکمیل شده است.` : 'افزودن دامنه شخصی در پلن رایگان فعال نیست. برای فعال‌سازی با پشتیبانی تماس بگیرید.' });
   }
-  if (!hostname) return res.status(400).json({ ok: false, error: 'نام دامنه را وارد کنید. نمونه: go.example.com' });
-  if (!isValidHostname(hostname)) return res.status(400).json({ ok: false, error: 'ساختار دامنه معتبر نیست. دامنه باید شامل پسوند باشد (مثال: short.example.com).' });
-  const mainHost = baseUrl(req).replace(/^https?:\/\//, '').split(':')[0];
-  if (hostname === mainHost.toLowerCase()) return res.status(400).json({ ok: false, error: 'دامنه اصلی سامانه را نمی‌توان اضافه کرد.' });
-  if (db.prepare('SELECT 1 FROM domains WHERE hostname = ?').get(hostname)) return res.status(409).json({ ok: false, error: 'این دامنه قبلاً ثبت شده است (توسط شما یا کاربر دیگر).' });
 
   const info = db.prepare(`INSERT INTO domains (user_id, hostname, token, status, mode, bio_slug) VALUES (?,?,?, 'pending', 'shortener', ?)`)
     .run(req.user.id, hostname, `linkok-verify=${randomCode(24)}`, null);

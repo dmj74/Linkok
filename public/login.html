@@ -93,8 +93,8 @@
     }));
     qsa('[data-fill-demo]').forEach((b) => b.addEventListener('click', () => {
       const isAdmin = b.dataset.fillDemo === 'admin';
-      form.username.value = isAdmin ? 'admin' : 'demo';
-      form.password.value = isAdmin ? 'Admin@1234' : 'Demo@1234';
+      form.elements.username.value = isAdmin ? 'admin' : 'demo';
+      form.elements.password.value = isAdmin ? 'Admin@1234' : 'Demo@1234';
       toast('اطلاعات حساب نمایشی پر شد. دکمه ورود را بزنید.', 'info');
     }));
 
@@ -115,7 +115,7 @@
       const btn = qs('button[type=submit]', form);
       LK.btnLoading(btn, true);
       try {
-        const res = await api('/api/auth/login', { method: 'POST', body: { username: form.username.value.trim(), password: form.password.value } });
+        const res = await api('/api/auth/login', { method: 'POST', body: { username: form.elements.username.value.trim(), password: form.elements.password.value } });
         toast(res.message || 'خوش آمدید!', 'ok');
         const params = new URLSearchParams(location.search);
         const redirect = params.get('redirect');
