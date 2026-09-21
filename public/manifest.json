@@ -1,0 +1,14 @@
+{
+  "name": "لینکوک — کوتاه‌کننده لینک و بیو لینک",
+  "short_name": "لینکوک",
+  "description": "کوتاه کردن لینک، اشتراک فایل و ساخت بیو لینک حرفه‌ای",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070b18",
+  "theme_color": "#6366f1",
+  "dir": "rtl",
+  "lang": "fa",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

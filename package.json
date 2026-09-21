@@ -1,0 +1,33 @@
+{
+  "name": "linkok",
+  "version": "1.0.0",
+  "description": "لینکوک — سامانه کوتاه‌کننده لینک، اشتراک فایل، بیو لینک و پنل مدیریت حرفه‌ای (فارسی، RTL، واکنش‌گرا)",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "check": "node -e \"require('./server/index.js')\"",
+    "reset-db": "node -e \"const fs=require('fs'),p=require('path');const d=p.join(__dirname,'data');fs.readdirSync(d).filter(f=>f.startsWith('linkok.db')).forEach(f=>fs.unlinkSync(p.join(d,f)));console.log('دیتابیس پاک شد؛ با اجرای بعدی داده اولیه ساخته می‌شود.')\""
+  },
+  "keywords": [
+    "url-shortener",
+    "bio-link",
+    "file-sharing",
+    "link-management",
+    "persian",
+    "rtl"
+  ],
+  "author": "Linkok",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^12.4.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "multer": "^2.0.2",
+    "qrcode": "^1.5.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

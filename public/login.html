@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ورود | لینکوک</title>
+<meta name="description" content="ورود به حساب کاربری لینکوک — کوتاه‌کننده لینک، بیو لینک و اشتراک فایل">
+<meta name="theme-color" content="#070b18">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+<div class="auth-page">
+  <!-- ===================== ستون برند ===================== -->
+  <aside class="auth-side">
+    <a class="logo" href="/" style="color:#fff;position:relative;z-index:2">
+      <span class="logo-mark" style="background:rgba(255,255,255,.2)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg>
+      </span>
+      <span>لینکوک</span>
+    </a>
+    <div>
+      <h2 style="font-size:1.9rem">دوباره خوش آمدی 👋</h2>
+      <p style="opacity:.92">وارد حساب شو و لینک‌ها، فایل‌ها و صفحه بیو لینکت را مدیریت کن.</p>
+      <div class="mt-3">
+        <div class="auth-feature"><div class="af-icon"><span data-icon="chart" data-size="19"></span></div><div><b>آمار زنده کلیک‌ها</b><span>مرورگر، دستگاه و منبع ورود بازدیدکنندگان</span></div></div>
+        <div class="auth-feature"><div class="af-icon"><span data-icon="domain" data-size="19"></span></div><div><b>دامنه اختصاصی</b><span>لینک‌های کوتاه با برند خودت</span></div></div>
+        <div class="auth-feature"><div class="af-icon"><span data-icon="upload" data-size="19"></span></div><div><b>اشتراک فایل</b><span>تبدیل فایل به لینک دانلود در چند ثانیه</span></div></div>
+        <div class="auth-feature"><div class="af-icon"><span data-icon="bio" data-size="19"></span></div><div><b>بیو لینک شخصی‌سازی‌شده</b><span>رنگ، فونت و دکمه‌ها به سلیقه تو</span></div></div>
+      </div>
+    </div>
+    <p class="text-xs" style="opacity:.8;position:relative;z-index:2">© <span data-year></span> لینکوک — کوتاه‌کننده لینک و بیو لینک فارسی</p>
+  </aside>
+
+  <!-- ===================== فرم ورود ===================== -->
+  <main class="auth-main">
+    <div class="auth-card">
+      <div class="row-between mb-3">
+        <div>
+          <h1 style="font-size:1.6rem;margin-bottom:4px">ورود به حساب</h1>
+          <p class="text-sm text-dim mb-0">با نام کاربری و رمز عبور خود وارد شوید</p>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="تغییر تم"></button>
+      </div>
+
+      <div data-announcement></div>
+
+      <form data-login-form class="card">
+        <label class="field">
+          <span class="label">نام کاربری یا ایمیل <span class="req">*</span></span>
+          <input class="input" name="username" autocomplete="username" placeholder="username" required autofocus dir="ltr">
+        </label>
+        <label class="field">
+          <span class="label">رمز عبور <span class="req">*</span></span>
+          <div style="position:relative">
+            <input class="input" type="password" name="password" autocomplete="current-password" placeholder="••••••••" required dir="ltr" style="padding-inline-start:44px">
+            <button type="button" class="btn btn-ghost btn-icon btn-icon-sm" data-toggle-pass style="position:absolute;inset-inline-start:6px;top:50%;transform:translateY(-50%)" aria-label="نمایش رمز"></button>
+          </div>
+        </label>
+        <div class="row-between mb-3">
+          <label class="checkbox"><input type="checkbox" name="remember" checked> مرا به خاطر بسپار</label>
+          <a href="/register" class="text-sm">حساب ندارید؟ ثبت‌نام</a>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit"><span data-icon="logout" data-size="18"></span> ورود به حساب</button>
+      </form>
+
+      <div class="card flat mt-3" style="background:var(--surface-2)">
+        <b class="text-sm">🔑 حساب‌های نمایشی برای تست</b>
+        <div class="grid g-2 mt-2" style="gap:10px">
+          <button class="btn btn-outline btn-sm" data-fill-demo="admin">مدیر: admin / Admin@1234</button>
+          <button class="btn btn-outline btn-sm" data-fill-demo="demo">کاربر: demo / Demo@1234</button>
+        </div>
+        <p class="text-xs text-dim mb-0 mt-2">این حساب‌ها فقط در نسخه نمایشی ساخته می‌شوند؛ پس از استقرار واقعی رمزها را تغییر دهید.</p>
+      </div>
+
+      <p class="text-center text-sm text-dim mt-3"><a href="/">← بازگشت به صفحه اصلی</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="/assets/js/common.js"></script>
+<script>
+(function () {
+  const { api, toast, qs, qsa, icon, loadSiteConfig, createIcons } = window.LK;
+  document.addEventListener('DOMContentLoaded', async () => {
+    const form = qs('[data-login-form]');
+    const year = qs('[data-year]'); if (year) year.textContent = new Intl.DateTimeFormat('fa-IR', { year: 'numeric' }).format(new Date());
+    qsa('[data-toggle-pass]').forEach((b) => b.addEventListener('click', () => {
+      const input = b.parentElement.querySelector('input');
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      b.innerHTML = icon(show ? 'x' : 'eye', 17);
+    }));
+    qsa('[data-fill-demo]').forEach((b) => b.addEventListener('click', () => {
+      const isAdmin = b.dataset.fillDemo === 'admin';
+      form.username.value = isAdmin ? 'admin' : 'demo';
+      form.password.value = isAdmin ? 'Admin@1234' : 'Demo@1234';
+      toast('اطلاعات حساب نمایشی پر شد. دکمه ورود را بزنید.', 'info');
+    }));
+
+    try {
+      const cfg = await loadSiteConfig();
+      window.LK.showAnnouncement(cfg);
+      if (cfg.site?.name) document.title = `ورود | ${cfg.site.name}`;
+    } catch { /* ignore */ }
+
+    // اگر کاربر قبلاً وارد شده است
+    try {
+      const me = await api('/api/auth/me');
+      if (me.user) location.href = me.user.role === 'admin' ? '/admin-panel' : '/dashboard';
+    } catch { /* ignore */ }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = qs('button[type=submit]', form);
+      LK.btnLoading(btn, true);
+      try {
+        const res = await api('/api/auth/login', { method: 'POST', body: { username: form.username.value.trim(), password: form.password.value } });
+        toast(res.message || 'خوش آمدید!', 'ok');
+        const params = new URLSearchParams(location.search);
+        const redirect = params.get('redirect');
+        setTimeout(() => { location.href = redirect || (res.user.role === 'admin' ? '/admin-panel' : '/dashboard'); }, 500);
+      } catch (err) {
+        toast(err.message, 'err');
+        LK.btnLoading(btn, false);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

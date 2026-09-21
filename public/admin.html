@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پنل مدیریت | لینکوک</title>
+<meta name="description" content="پنل مدیریت لینکوک — مدیریت کاربران، لینک‌ها، فایل‌ها، دامنه‌ها، تنظیمات و گزارش‌ها">
+<meta name="theme-color" content="#070b18">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+<div class="app-shell">
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <!-- ============================ سایدبار ============================ -->
+  <aside class="sidebar" data-sidebar>
+    <div class="sidebar-head">
+      <a class="logo" href="/">
+        <span class="logo-mark" style="background:linear-gradient(135deg,#f43f5e,#a855f7)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.5v6c0 4.4-3 7.9-7 9.5-4-1.6-7-5.1-7-9.5v-6L12 3Z"/><path d="M9 12l2 2 4-4"/></svg>
+        </span>
+        <span>پنل مدیریت</span>
+      </a>
+      <button class="btn btn-ghost btn-icon" data-sidebar-close aria-label="بستن"><span data-icon="x" data-size="18"></span></button>
+    </div>
+
+    <nav class="side-nav" aria-label="منوی مدیریت">
+      <div class="side-group-label">مرور کلی</div>
+      <button class="side-item active" data-tab="dashboard"><span data-icon="home" data-size="19"></span> داشبورد</button>
+      <button class="side-item" data-tab="analytics"><span data-icon="chartLine" data-size="19"></span> تحلیل ترافیک</button>
+      <div class="side-group-label">مدیریت محتوا</div>
+      <button class="side-item" data-tab="users"><span data-icon="users" data-size="19"></span> کاربران <span class="badge" data-count="users" style="margin-inline-start:auto">۰</span></button>
+      <button class="side-item" data-tab="links"><span data-icon="link" data-size="19"></span> لینک‌ها <span class="badge" data-count="links" style="margin-inline-start:auto">۰</span></button>
+      <button class="side-item" data-tab="files"><span data-icon="file" data-size="19"></span> فایل‌ها <span class="badge" data-count="files" style="margin-inline-start:auto">۰</span></button>
+      <button class="side-item" data-tab="domains"><span data-icon="domain" data-size="19"></span> دامنه‌ها <span class="badge badge-warn" data-count="domains" style="margin-inline-start:auto">۰</span></button>
+      <button class="side-item" data-tab="bio"><span data-icon="bio" data-size="19"></span> صفحات بیو لینک</button>
+      <div class="side-group-label">سامانه</div>
+      <button class="side-item" data-tab="settings"><span data-icon="settings" data-size="19"></span> تنظیمات سایت</button>
+      <button class="side-item" data-tab="announcements"><span data-icon="bell" data-size="19"></span> اطلاعیه‌ها</button>
+      <button class="side-item" data-tab="logs"><span data-icon="clipboard" data-size="19"></span> گزارش فعالیت‌ها</button>
+      <a class="side-item" href="/dashboard"><span data-icon="home" data-size="19"></span> داشبورد کاربری</a>
+      <button class="side-item" data-action="logout"><span data-icon="logout" data-size="19"></span> خروج</button>
+    </nav>
+
+    <div class="side-foot">
+      <div class="panel">
+        <div class="flex between mb-1"><b class="text-sm">وضعیت سامانه</b><span class="dot pulse"></span></div>
+        <div class="text-xs text-dim" data-system-info>در حال دریافت…</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================ بدنه ============================ -->
+  <div class="app-main">
+    <header class="app-topbar">
+      <div class="flex" style="min-width:0">
+        <button class="btn btn-ghost btn-icon" data-sidebar-open aria-label="منو"><span data-icon="menu" data-size="20"></span></button>
+        <div style="min-width:0">
+          <h1 class="mb-0 truncate" style="font-size:1.05rem" data-page-title>داشبورد مدیریت</h1>
+          <span class="text-xs text-dim truncate" data-page-sub>نمای کلی سامانه</span>
+        </div>
+      </div>
+      <div class="flex" style="gap:8px">
+        <button class="btn btn-outline btn-sm" data-action="maintenance"><span data-icon="shield" data-size="15"></span> <span class="hide-sm">حالت تعمیر</span></button>
+        <button class="btn btn-outline btn-sm" data-action="export" title="خروجی داده‌ها"><span data-icon="download" data-size="15"></span> <span class="hide-sm">خروجی</span></button>
+        <button class="theme-toggle" data-theme-toggle aria-label="تغییر تم"></button>
+        <div style="position:relative">
+          <button class="user-chip" data-dropdown="admin">
+            <span data-admin-avatar></span>
+            <span class="text-sm strong truncate" data-admin-name style="max-width:110px">مدیر</span>
+          </button>
+          <div class="dropdown hide" data-dropdown-menu="admin">
+            <div style="padding:8px 10px 10px"><b class="text-sm" data-admin-name-2>مدیر</b><div class="text-xs text-dim">@admin</div></div>
+            <div class="sep"></div>
+            <button data-tab="settings"><span data-icon="settings" data-size="17"></span> تنظیمات سایت</button>
+            <button data-tab="logs"><span data-icon="clipboard" data-size="17"></span> گزارش‌ها</button>
+            <a href="/" target="_blank" rel="noopener"><span data-icon="globe" data-size="17"></span> مشاهده سایت</a>
+            <div class="sep"></div>
+            <button data-action="logout" style="color:var(--danger)"><span data-icon="logout" data-size="17"></span> خروج</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-content">
+      <div data-announcement></div>
+
+      <!-- ============================ داشبورد ============================ -->
+      <section data-panel="dashboard" hidden>
+        <div class="grid g-4 mb-3" data-kpis></div>
+        <div class="grid" style="grid-template-columns:1.6fr 1fr;gap:18px">
+          <div class="card">
+            <div class="card-head">
+              <div><h3 class="card-title"><span data-icon="chartLine" data-size="19"></span> روند کلیک‌ها، لینک‌ها و کاربران</h3><p class="card-sub" data-series-sum>—</p></div>
+              <div class="btn-group">
+                <button class="active" data-range="7">۷ روز</button><button data-range="30">۳۰ روز</button><button data-range="90">۹۰ روز</button>
+              </div>
+            </div>
+            <div data-chart-series style="min-height:260px"></div>
+          </div>
+          <div class="card">
+            <h3 class="card-title mb-2"><span data-icon="layers" data-size="19"></span> سهم پلن‌ها</h3>
+            <div data-chart-plans></div>
+            <div class="divider"></div>
+            <h3 class="card-title mb-2"><span data-icon="info" data-size="18"></span> اطلاعات سیستم</h3>
+            <div data-system-cards></div>
+          </div>
+        </div>
+        <div class="grid g-3 mt-3">
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="fire" data-size="18"></span> پربازدیدترین لینک‌ها</h3><div data-top-links></div></div>
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="users" data-size="18"></span> فعال‌ترین کاربران</h3><div data-top-users></div></div>
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="globe" data-size="18"></span> دستگاه‌ها</h3><div data-chart-devices></div></div>
+        </div>
+        <div class="grid g-2 mt-3">
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="globe" data-size="18"></span> مرورگرها</h3><div data-chart-browsers></div></div>
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="layers" data-size="18"></span> منابع ورود</h3><div data-chart-refs></div></div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-head"><h3 class="card-title"><span data-icon="file" data-size="18"></span> پر دانلودترین فایل‌ها</h3><button class="btn btn-ghost btn-sm" data-tab="files">همه فایل‌ها</button></div>
+          <div class="table-wrap"><table class="table"><thead><tr><th>فایل</th><th>کد</th><th>حجم</th><th>دانلود</th><th></th></tr></thead><tbody data-top-files></tbody></table></div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-head"><h3 class="card-title"><span data-icon="clipboard" data-size="18"></span> آخرین فعالیت‌ها</h3><button class="btn btn-ghost btn-sm" data-tab="logs">همه گزارش‌ها</button></div>
+          <div class="table-wrap"><table class="table"><thead><tr><th>زمان</th><th>کاربر</th><th>عملیات</th><th>موجودیت</th></tr></thead><tbody data-recent-logs></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ============================ تحلیل ترافیک ============================ -->
+      <section data-panel="analytics" hidden>
+        <div class="card mb-3">
+          <div class="row-between">
+            <div><h3 class="card-title"><span data-icon="chart" data-size="19"></span> تحلیل ترافیک سامانه</h3><p class="card-sub">کلیک‌های همه لینک‌ها با تفکیک کاربر یکتا</p></div>
+            <div class="btn-group">
+              <button data-range="7">۷ روز</button><button class="active" data-range="30">۳۰ روز</button><button data-range="90">۹۰ روز</button><button data-range="365">۱ سال</button>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3"><div data-an-chart></div></div>
+        <div class="grid g-2 mb-3">
+          <div class="card"><h3 class="card-title mb-2">مرورگرها</h3><div data-an-browser></div></div>
+          <div class="card"><h3 class="card-title mb-2">سیستم‌عامل</h3><div data-an-os></div></div>
+          <div class="card"><h3 class="card-title mb-2">دستگاه‌ها</h3><div data-an-device></div></div>
+          <div class="card"><h3 class="card-title mb-2">منابع ورود</h3><div data-an-ref></div></div>
+        </div>
+        <div class="card mb-3"><h3 class="card-title mb-2"><span data-icon="clock" data-size="18"></span> توزیع ساعتی کلیک‌ها</h3><div data-an-hours></div></div>
+        <div class="grid g-2">
+          <div class="card">
+            <h3 class="card-title mb-2">برترین لینک‌ها</h3>
+            <div class="table-wrap"><table class="table"><thead><tr><th>کد</th><th>عنوان</th><th>کلیک</th><th>یکتا</th></tr></thead><tbody data-an-top></tbody></table></div>
+          </div>
+          <div class="card">
+            <h3 class="card-title mb-2">دامنه‌های پربازدید</h3>
+            <div class="table-wrap"><table class="table"><thead><tr><th>دامنه</th><th>کلیک</th></tr></thead><tbody data-an-domains></tbody></table></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ کاربران ============================ -->
+      <section data-panel="users" hidden>
+        <div class="card mb-3">
+          <div class="row-between">
+            <div class="flex wrap" style="gap:10px">
+              <input class="input" data-users-search placeholder="جستجو بر اساس نام کاربری، ایمیل یا نام..." style="min-width:260px">
+              <select class="select" data-users-role style="width:auto">
+                <option value="">همه نقش‌ها</option><option value="user">کاربر عادی</option><option value="admin">مدیر</option>
+              </select>
+              <select class="select" data-users-status style="width:auto">
+                <option value="">همه وضعیت‌ها</option><option value="active">فعال</option><option value="banned">مسدود</option><option value="suspended">معلق</option>
+              </select>
+              <select class="select" data-users-plan style="width:auto">
+                <option value="">همه پلن‌ها</option><option value="free">رایگان</option><option value="pro">حرفه‌ای</option><option value="business">کسب‌وکار</option>
+              </select>
+            </div>
+            <span class="text-sm text-dim" data-users-total>—</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>کاربر</th><th>پلن</th><th>نقش</th><th>لینک / فایل</th><th>کلیک</th><th>وضعیت</th><th>عضویت</th><th></th></tr></thead>
+            <tbody data-users-body></tbody>
+          </table>
+        </div>
+        <div class="pagination" data-users-pagination></div>
+      </section>
+
+      <!-- ============================ لینک‌ها ============================ -->
+      <section data-panel="links" hidden>
+        <div class="card mb-3">
+          <div class="row-between">
+            <div class="flex wrap" style="gap:10px">
+              <input class="input" data-admin-links-search placeholder="جستجو در کد، مقصد، عنوان یا کاربر..." style="min-width:280px">
+              <select class="select" data-admin-links-status style="width:auto">
+                <option value="">همه وضعیت‌ها</option><option value="active">فعال</option><option value="inactive">غیرفعال</option><option value="expired">منقضی</option>
+              </select>
+            </div>
+            <span class="text-sm text-dim" data-admin-links-total>—</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>لینک</th><th>مقصد</th><th>کاربر</th><th>کلیک</th><th>وضعیت</th><th>تاریخ</th><th></th></tr></thead>
+            <tbody data-admin-links-body></tbody>
+          </table>
+        </div>
+        <div class="pagination" data-admin-links-pagination></div>
+      </section>
+
+      <!-- ============================ فایل‌ها ============================ -->
+      <section data-panel="files" hidden>
+        <div class="grid g-3 mb-3" data-admin-files-summary></div>
+        <div class="card mb-3">
+          <div class="row-between">
+            <input class="input" data-admin-files-search placeholder="جستجوی نام فایل، کد یا کاربر..." style="min-width:280px">
+            <span class="text-sm text-dim" data-admin-files-total>—</span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>فایل</th><th>کد</th><th>کاربر</th><th>حجم</th><th>دانلود</th><th>وضعیت</th><th></th></tr></thead>
+            <tbody data-admin-files-body></tbody>
+          </table>
+        </div>
+        <div class="pagination" data-admin-files-pagination></div>
+      </section>
+
+      <!-- ============================ دامنه‌ها ============================ -->
+      <section data-panel="domains" hidden>
+        <div class="card mb-3">
+          <div class="card-head"><h3 class="card-title"><span data-icon="domain" data-size="19"></span> دامنه‌های ثبت‌شده</h3>
+            <span class="text-sm text-dim" data-admin-domains-total>—</span></div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>دامنه</th><th>کاربر</th><th>وضعیت</th><th>کاربرد</th><th>لینک / کلیک</th><th>تاریخ</th><th></th></tr></thead>
+              <tbody data-admin-domains-body></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ بیو لینک‌ها ============================ -->
+      <section data-panel="bio" hidden>
+        <div class="card">
+          <div class="card-head"><h3 class="card-title"><span data-icon="bio" data-size="19"></span> صفحات بیو لینک کاربران</h3>
+            <span class="text-sm text-dim" data-admin-bio-total>—</span></div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>کاربر</th><th>نشانی</th><th>عنوان</th><th>بلوک</th><th>بازدید</th><th>وضعیت</th><th></th></tr></thead>
+              <tbody data-admin-bio-body></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ تنظیمات ============================ -->
+      <section data-panel="settings" hidden>
+        <form data-settings-form>
+          <div class="grid g-2">
+            <div class="card">
+              <div class="card-head"><h3 class="card-title"><span data-icon="settings" data-size="18"></span> مشخصات سایت</h3></div>
+              <label class="field"><span class="label">نام سایت</span><input class="input" name="site_name"></label>
+              <label class="field"><span class="label">شعار / تگ‌لاین</span><input class="input" name="site_tagline"></label>
+              <label class="field"><span class="label">توضیحات (متا دیسکریپشن)</span><textarea class="textarea" name="site_description" style="min-height:80px"></textarea></label>
+              <label class="field"><span class="label">آدرس پایه سایت (برای ساخت لینک‌ها)</span><input class="input mono" dir="ltr" name="base_url" placeholder="مثلاً https://linkok.ir (خالی = دامنه درخواست)"></label>
+              <label class="field"><span class="label">ایمیل پشتیبانی</span><input class="input mono" dir="ltr" name="contact_email"></label>
+              <label class="field mb-0"><span class="label">متن فوتر</span><input class="input" name="footer_text"></label>
+            </div>
+
+            <div class="flex-col" style="gap:18px">
+              <div class="card">
+                <div class="card-head"><h3 class="card-title"><span data-icon="users" data-size="18"></span> ثبت‌نام و دسترسی</h3></div>
+                <div class="flex-col" style="gap:14px">
+                  <label class="flex between" style="cursor:pointer"><span>ثبت‌نام کاربران جدید فعال باشد</span>
+                    <span class="switch"><input type="checkbox" data-setting="allow_registration" data-type="bool"><span></span></span></label>
+                  <label class="flex between" style="cursor:pointer"><span>ساخت لینک بدون حساب (مهمان)</span>
+                    <span class="switch"><input type="checkbox" data-setting="allow_anonymous_links" data-type="bool"><span></span></span></label>
+                  <label class="flex between" style="cursor:pointer"><span>آپلود فایل بدون حساب (مهمان)</span>
+                    <span class="switch"><input type="checkbox" data-setting="allow_anonymous_files" data-type="bool"><span></span></span></label>
+                  <label class="flex between" style="cursor:pointer"><span>ایمیل در ثبت‌نام الزامی باشد</span>
+                    <span class="switch"><input type="checkbox" data-setting="require_email" data-type="bool"><span></span></span></label>
+                  <label class="flex between" style="cursor:pointer"><span>حالت تعمیر (فقط مدیران دسترسی داشته باشند)</span>
+                    <span class="switch"><input type="checkbox" data-setting="maintenance" data-type="bool"><span></span></span></label>
+                  <label class="field mb-0"><span class="label">پلن پیش‌فرض کاربران جدید</span>
+                    <select class="select" data-setting="default_plan"><option value="free">رایگان</option><option value="pro">حرفه‌ای</option><option value="business">کسب‌وکار</option></select></label>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><h3 class="card-title"><span data-icon="bolt" data-size="18"></span> کوتاه‌سازی و فایل</h3></div>
+                <div class="grid g-2" style="gap:12px">
+                  <label class="field mb-0"><span class="label">طول کد خودکار</span><input class="input" name="short_code_length" inputmode="numeric"></label>
+                  <label class="field mb-0"><span class="label">حداکثر حجم آپلود (مگابایت)</span><input class="input" name="max_upload_mb" inputmode="numeric"></label>
+                  <label class="field mb-0"><span class="label">نگهداری فایل‌ها (روز، ۰ = نامحدود)</span><input class="input" name="retention_days" inputmode="numeric"></label>
+                  <label class="field mb-0"><span class="label">رنگ اصلی برند</span><input type="color" name="theme_accent"></label>
+                </div>
+                <label class="field mt-2 mb-0"><span class="label">کلمات/دامنه‌های غیرمجاز (با کاما جدا کنید)</span>
+                  <textarea class="textarea" name="banned_words" style="min-height:70px" dir="ltr"></textarea></label>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><h3 class="card-title"><span data-icon="bell" data-size="18"></span> نوار اطلاع‌رسانی سایت</h3></div>
+                <label class="field"><span class="label">متن اطلاعیه (خالی = مخفی)</span><input class="input" data-setting="announcement" placeholder="مثلاً: جشنواره تخفیف پلن حرفه‌ای تا پایان هفته"></label>
+                <label class="field mb-0"><span class="label">نوع اطلاعیه</span>
+                  <select class="select" data-setting="announcement_level">
+                    <option value="info">اطلاع‌رسانی (آبی)</option><option value="success">موفقیت (سبز)</option>
+                    <option value="warning">هشدار (نارنجی)</option><option value="danger">مهم (قرمز)</option>
+                  </select></label>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-3">
+            <div class="row-between">
+              <p class="mb-0 text-sm text-dim">تغییرات پس از ذخیره بلافاصله روی سایت اعمال می‌شود.</p>
+              <div class="flex" style="gap:8px">
+                <button class="btn btn-primary" type="submit"><span data-icon="save" data-size="16"></span> ذخیره تنظیمات</button>
+                <button class="btn btn-ghost" type="reset">بازگردانی فرم</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- ============================ اطلاعیه‌ها ============================ -->
+      <section data-panel="announcements" hidden>
+        <div class="grid" style="grid-template-columns:1fr 1.4fr;gap:18px">
+          <div class="card">
+            <div class="card-head"><h3 class="card-title"><span data-icon="plus" data-size="18"></span> اطلاعیه جدید</h3></div>
+            <form data-announcement-form>
+              <label class="field"><span class="label">عنوان</span><input class="input" name="title" required maxlength="120"></label>
+              <label class="field"><span class="label">متن کامل (اختیاری)</span><textarea class="textarea" name="body" maxlength="600"></textarea></label>
+              <label class="field"><span class="label">نوع</span>
+                <select class="select" name="level"><option value="info">اطلاع‌رسانی</option><option value="success">موفقیت</option><option value="warning">هشدار</option><option value="danger">مهم</option></select></label>
+              <label class="checkbox mb-3"><input type="checkbox" name="as_banner" checked> نمایش به‌صورت نوار در بالای سایت</label>
+              <button class="btn btn-primary btn-block" type="submit"><span data-icon="bell" data-size="16"></span> ثبت اطلاعیه</button>
+            </form>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 class="card-title"><span data-icon="bell" data-size="18"></span> اطلاعیه‌های ثبت‌شده</h3></div>
+            <div data-announcements-list></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ گزارش‌ها ============================ -->
+      <section data-panel="logs" hidden>
+        <div class="card mb-3">
+          <div class="row-between">
+            <input class="input" data-logs-search placeholder="جستجو در عملیات، کاربر یا موجودیت..." style="min-width:300px">
+            <a class="btn btn-outline btn-sm" href="/api/admin/logs/export"><span data-icon="download" data-size="15"></span> خروجی CSV گزارش‌ها</a>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>زمان</th><th>کاربر</th><th>عملیات</th><th>موجودیت</th><th>IP</th><th>جزئیات</th></tr></thead>
+            <tbody data-logs-body></tbody>
+          </table>
+        </div>
+        <div class="pagination" data-logs-pagination></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/charts.js"></script>
+<script src="/assets/js/admin.js"></script>
+</body>
+</html>
