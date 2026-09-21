@@ -192,7 +192,7 @@
     const contact = qs('[data-contact]');
     if (contact && site.contact) { contact.textContent = site.contact; contact.href = 'mailto:' + site.contact; }
     const foot = qs('[data-footer-text]'); if (foot && site.footer) foot.textContent = site.footer;
-    qsa('[data-copy="domain"]').forEach((el) => el.addEventListener('click', () => copy((site.base_url || location.origin) + '/')));
+    qsa('[data-copy-domain]').forEach((el) => el.addEventListener('click', () => copy((site.base_url || location.origin) + '/')));
     if (site.name) document.title = `${site.name} | ${site.tagline || 'کوتاه‌کننده لینک، بیو لینک و اشتراک فایل'}`;
   });
 })();

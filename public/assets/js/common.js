@@ -288,7 +288,11 @@
       }));
     }
     qsa('[data-theme-toggle]').forEach((b) => b.addEventListener('click', toggleTheme));
-    qsa('[data-copy]').forEach((el) => el.addEventListener('click', () => copy(el.dataset.copy)));
+    qsa('[data-copy]').forEach((el) => {
+      if (el.dataset.bCopy) return; // جلوگیری از اتصال دوباره در پنل‌ها
+      el.dataset.bCopy = '1';
+      el.addEventListener('click', () => copy(el.dataset.copy));
+    });
   }
 
   /* ------------------------------ سایدبار پنل ------------------------------- */

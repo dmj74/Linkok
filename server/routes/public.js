@@ -8,7 +8,7 @@ const {
 } = require('../util');
 const { baseUrl } = require('../auth');
 const views = require('../views');
-const { UPLOAD_DIR } = require('../config');
+const { UPLOAD_DIR, BASE_URL } = require('../config');
 
 const router = express.Router();
 
@@ -145,16 +145,37 @@ router.get(['/s/:code', '/r/:code'], (req, res, next) => {
 });
 
 /** دامنه‌های اختصاصی: هر مسیر یک کد لینک است */
+/* فهرست دامنه‌های تأییدشده با کش ۶۰ ثانیه‌ای (برای بررسی سریع هاست) */
+let verifiedHostsCache = { at: 0, set: new Set() };
+function verifiedHosts() {
+  if (Date.now() - verifiedHostsCache.at > 60000) {
+    const rows = db.prepare("SELECT LOWER(hostname) AS hostname FROM domains WHERE status = 'verified'").all();
+    verifiedHostsCache = { at: Date.now(), set: new Set(rows.map((r) => r.hostname)) };
+  }
+  return verifiedHostsCache.set;
+}
+const isCustomHost = (host) => !!host && verifiedHosts().has(String(host).toLowerCase());
+
 function customDomainHandler(req, res, next) {
-  const host = String(req.headers['x-forwarded-host'] || req.headers.host || '').split(':')[0].toLowerCase();
-  const mainHost = baseUrl(req).replace(/^https?:\/\//, '').split(':')[0].toLowerCase();
-  if (!host || host === mainHost) return next();
-  const domain = db.prepare("SELECT * FROM domains WHERE hostname = ? AND status = 'verified'").get(host);
+  const host = String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].split(':')[0].trim().toLowerCase();
+  if (!host) return next();
+  // هاست اصلی فقط وقتی معتبر است که BASE_URL یا تنظیمات base_url مشخص شده باشد؛
+  // در غیر این صورت مقایسه با هاست درخواست، دامنه‌های اختصاصی را از کار می‌انداخت.
+  const configuredBase = String(BASE_URL || getSetting('base_url', '') || '').replace(/\/+$/, '');
+  const mainHost = configuredBase ? configuredBase.replace(/^https?:\/\//, '').split(':')[0].toLowerCase() : '';
+  if (mainHost && host === mainHost) return next();
+  if (!isCustomHost(host)) return next();
+  const domain = db.prepare("SELECT * FROM domains WHERE LOWER(hostname) = ? AND status = 'verified'").get(host);
   if (!domain) return next();
 
   const parts = req.path.split('/').filter(Boolean);
   if (!parts.length) {
     if (domain.mode === 'bio' && domain.bio_slug) return res.redirect(302, `/u/${domain.bio_slug}`);
+    // دامنه‌های تنظیم‌شده روی «انتقال به سایت اصلی» ریشه را به دامنه اصلی هدایت می‌کنند
+    if (domain.mode === 'redirect_home') {
+      const home = BASE_URL || String(getSetting('base_url', '') || '').replace(/\/+$/, '');
+      if (home && home.replace(/^https?:\/\//, '').split(':')[0].toLowerCase() !== host) return res.redirect(302, home + '/');
+    }
     const owner = db.prepare('SELECT username, display_name FROM users WHERE id = ?').get(domain.user_id);
     const page = db.prepare('SELECT slug FROM bio_pages WHERE user_id = ?').get(domain.user_id);
     return res.send(views.noticeHtml({
@@ -192,7 +213,7 @@ function renderBio(req, res, page, domain = null) {
   const totalViews = page.views || db.prepare('SELECT COUNT(*) AS c FROM bio_views WHERE page_id = ?').get(page.id).c;
   const theme = { ...require('./bio').DEFAULT_THEME, ...(page.theme ? JSON.parse(page.theme) : {}) };
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.send(views.bioHtml({ page, blocks, theme, views: totalViews, siteName: siteName(), customDomain: !!domain }));
+  res.send(views.bioHtml({ page, blocks, theme, views: totalViews, siteName: siteName(), customDomain: !!domain, origin: baseUrl(req) }));
 }
 
 router.get('/u/:slug', (req, res, next) => {
@@ -251,7 +272,7 @@ router.get('/f/:code', (req, res, next) => {
   const owner = file.user_id ? db.prepare('SELECT display_name, username FROM users WHERE id = ?').get(file.user_id) : null;
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   return res.send(views.fileHtml({
-    file: { ...file, full_url: `${baseUrl(req)}/f/${file.code}` }, siteName: siteName(),
+    file: { ...file, full_url: `${baseUrl(req)}/f/${file.code}` }, siteName: siteName(), origin: baseUrl(req),
     owner: owner ? (owner.display_name || owner.username) : 'مهمان',
   }));
 });
@@ -279,6 +300,7 @@ router.get(['/f/:code/download', '/files/:code/download', '/d/:code'], (req, res
 
 module.exports = router;
 module.exports.customDomainHandler = customDomainHandler;
+module.exports.isCustomHost = isCustomHost;
 module.exports.deliverLink = deliverLink;
 module.exports.renderBio = renderBio;
 module.exports.recordClick = recordClick;

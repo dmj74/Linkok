@@ -358,7 +358,10 @@ router.post('/announcements', (req, res) => {
   if (!title) return res.status(400).json({ ok: false, error: 'عنوان اطلاعیه لازم است.' });
   const level = ['info', 'success', 'warning', 'danger'].includes(req.body.level) ? req.body.level : 'info';
   const info = db.prepare('INSERT INTO announcements (title, body, level, is_active) VALUES (?,?,?,1)').run(title, String(req.body.body || '').slice(0, 600), level);
-  if (req.body.as_banner) setSetting('announcement', title); setSetting('announcement_level', level);
+  if (req.body.as_banner) {
+    setSetting('announcement', title);
+    setSetting('announcement_level', level);
+  }
   res.status(201).json({ ok: true, item: db.prepare('SELECT * FROM announcements WHERE id = ?').get(info.lastInsertRowid), message: 'اطلاعیه ثبت شد.' });
 });
 router.delete('/announcements/:id', (req, res) => {

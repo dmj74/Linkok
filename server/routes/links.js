@@ -44,7 +44,8 @@ function checkUrlSafety(url) {
   return { safe: true };
 }
 
-function createLink({ req, userId, url, alias, domainId, title, note, password, expiresAt, clickLimit, tags }) {
+function createLink({ req, userId, url, alias, domainId, domain_id, title, note, password, expiresAt, clickLimit, tags }) {
+  if (domainId === undefined || domainId === null) domainId = domain_id; // پشتیبانی از نام‌گذاری snake_case در API
   const norm = normalizeUrl(url);
   if (!norm || !norm.url) return { error: 'آدرس مقصد معتبر نیست. نمونه: https://example.com/page' };
   const safety = checkUrlSafety(norm.url);

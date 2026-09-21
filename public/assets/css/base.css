@@ -457,6 +457,7 @@ table.table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:620px}
   .section{padding:46px 0}
 }
 @media (max-width:640px){
+  .hide-sm{display:none !important}
   .hero{padding:36px 0 20px}
   .container{padding:0 15px}
   .card{padding:17px;border-radius:var(--radius)}

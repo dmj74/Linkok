@@ -31,6 +31,15 @@ app.use('/uploads', express.static(UPLOAD_DIR, {
     res.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self' data:; media-src 'self' data:; style-src 'unsafe-inline'");
   },
 }));
+// درخواست‌های دامنه اختصاصی باید پیش از فایل‌های استاتیک بررسی شوند
+// (وگرنه «/» با صفحه اصلی سایت پاسخ داده می‌شود و حالت بیو/ریدایرکت کار نمی‌کند)
+const publicRoutesEarly = require('./routes/public');
+app.use((req, res, next) => {
+  if (req.path.startsWith('/assets/') || req.path.startsWith('/uploads/') || req.path.startsWith('/api/') || req.path === '/healthz') return next();
+  const host = String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].split(':')[0].trim();
+  if (!host || !publicRoutesEarly.isCustomHost(host)) return next();
+  return publicRoutesEarly.customDomainHandler(req, res, next);
+});
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'], maxAge: '1h' }));
 
 /* --------------------------------- کاربر -------------------------------------- */

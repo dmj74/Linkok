@@ -63,7 +63,10 @@ a{text-decoration:none;color:inherit}
 `;
 
 /* ------------------------------ لایه‌ها ---------------------------- */
-function htmlDocument({ title, description, head = '', body, lang = 'fa', dir = 'rtl', bodyClass = '' }) {
+const abs = (url, origin) => (!url ? '' : (/^https?:\/\//i.test(url) ? url : String(origin || '').replace(/\/$/, '') + url));
+
+function htmlDocument({ title, description, head = '', body, lang = 'fa', dir = 'rtl', bodyClass = '', image = '', url = '' }) {
+  const ogImage = image ? `<meta property="og:image" content="${esc(image)}">` : '<meta property="og:image" content="/assets/img/og.jpg">';
   return `<!DOCTYPE html>
 <html lang="${lang}" dir="${dir}">
 <head>
@@ -72,6 +75,12 @@ function htmlDocument({ title, description, head = '', body, lang = 'fa', dir = 
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description || '')}">
 <meta name="theme-color" content="#6366f1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description || '')}">
+${url ? `<meta property="og:url" content="${esc(url)}">` : ''}
+${ogImage}
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <style>${BASE_CSS}${head}</style>
 </head>
@@ -82,7 +91,7 @@ ${body}
 }
 
 /* -------------------------- صفحه بیو لینک -------------------------- */
-function bioHtml({ page, blocks, theme, views, siteName, customDomain }) {
+function bioHtml({ page, blocks, theme, views, siteName, customDomain, origin = '' }) {
   const t = theme || {};
   const bgLayers = [];
   if (t.bgType === 'gradient') bgLayers.push(`linear-gradient(${Number(t.bgAngle) || 160}deg, ${t.bgFrom || '#6366f1'}, ${t.bgTo || '#a855f7'})`);
@@ -154,7 +163,6 @@ function bioHtml({ page, blocks, theme, views, siteName, customDomain }) {
     : `<div class="avatar-fallback">${initial}</div>`;
 
   const body = `<div class="wrap">
-  <img src="/assets/img/logo.svg" alt="logo" style="display:none">
   ${avatar}
   ${customDomain ? `<div class="verified">${icon('shield', 13)} دامنه اختصاصی</div>` : ''}
   <h1>${esc(page.title || '')}</h1>
@@ -172,12 +180,14 @@ function bioHtml({ page, blocks, theme, views, siteName, customDomain }) {
     head: styles,
     body,
     bodyClass: 'bio-page',
+    image: abs(page.avatar || '/assets/img/og.jpg', origin),
+    url: origin ? `${origin}/u/${page.slug}` : '',
   });
 }
 const originSafe = (v) => (typeof v === 'string' && v.startsWith('http') ? v : '/');
 
 /* --------------------------- صفحه فایل ----------------------------- */
-function fileHtml({ file, owner, siteName, links }) {
+function fileHtml({ file, owner, siteName, links, origin = '' }) {
   const isImage = /^image\//.test(file.mime || '');
   const isVideo = /^video\//.test(file.mime || '');
   const isAudio = /^audio\//.test(file.mime || '');
@@ -218,7 +228,12 @@ function fileHtml({ file, owner, siteName, links }) {
   </div>
   <div class="footer">اشتراک‌گذاری امن با <a href="/">${esc(siteName || 'لینکوک')}</a></div>
 </div>`;
-  return htmlDocument({ title: `${file.orig_name || 'فایل'} | ${siteName || 'لینکوک'}`, description: `دانلود ${file.orig_name}`, head: styles, body, bodyClass: 'file-page' });
+  const shareImage = abs((/^image\//.test(file.mime || '') || /^(png|jpe?g|gif|webp|svg)$/i.test(file.ext || ''))
+    ? `/f/${file.code}/download` : '/assets/img/og.jpg', origin);
+  return htmlDocument({
+    title: `${file.orig_name || 'فایل'} | ${siteName || 'لینکوک'}`, description: `دانلود ${file.orig_name}`,
+    head: styles, body, bodyClass: 'file-page', image: shareImage, url: origin ? `${origin}/f/${file.code}` : '',
+  });
 }
 
 /* ----------------------- صفحه رمز / پیام‌ها ------------------------ */
