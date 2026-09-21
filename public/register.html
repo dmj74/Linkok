@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ثبت‌نام | لینکوک</title>
+<meta name="description" content="ساخت حساب رایگان در لینکوک با نام کاربری و رمز عبور — کوتاه‌کننده لینک، بیو لینک و اشتراک فایل">
+<meta name="theme-color" content="#070b18">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+<div class="auth-page">
+  <aside class="auth-side">
+    <a class="logo" href="/" style="color:#fff;position:relative;z-index:2">
+      <span class="logo-mark" style="background:rgba(255,255,255,.2)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg>
+      </span>
+      <span>لینکوک</span>
+    </a>
+    <div>
+      <h2 style="font-size:1.9rem">حساب رایگان بساز 🚀</h2>
+      <p style="opacity:.92">تنها با یک نام کاربری و رمز عبور، به همه امکانات لینکوک دسترسی پیدا می‌کنی.</p>
+      <div class="mt-3">
+        <div class="auth-feature"><div class="af-icon"><span data-icon="bolt" data-size="19"></span></div><div><b>کوتاه‌سازی نامحدود در پلن رایگان</b><span>تا ۵۰۰ لینک کوتاه با نامک دلخواه</span></div></div>
+        <div class="auth-feature"><div class="af-icon"><span data-icon="file" data-size="19"></span></div><div><b>آپلود فایل و لینک دانلود</b><span>تا ۱۰۰ فایل در پلن رایگان</span></div></div>
+        <div class="auth-feature"><div class="af-icon"><span data-icon="palette" data-size="19"></span></div><div><b>بیو لینک شخصی‌سازی‌شده</b><span>رنگ‌ها، فونت و دکمه‌ها کاملاً سلیقه‌ای</span></div></div>
+        <div class="auth-feature"><div class="af-icon"><span data-icon="key" data-size="19"></span></div><div><b>کلید API برای توسعه‌دهندگان</b><span>اتوماسیون ساخت لینک و آپلود</span></div></div>
+      </div>
+    </div>
+    <p class="text-xs" style="opacity:.8;position:relative;z-index:2">با ثبت‌نام، <a href="/terms" style="color:#fff;text-decoration:underline">قوانین استفاده</a> را می‌پذیرید.</p>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <div class="row-between mb-3">
+        <div>
+          <h1 style="font-size:1.6rem;margin-bottom:4px">ساخت حساب جدید</h1>
+          <p class="text-sm text-dim mb-0">رایگان و بدون نیاز به کارت بانکی</p>
+        </div>
+        <button class="theme-toggle" data-theme-toggle aria-label="تغییر تم"></button>
+      </div>
+
+      <div data-announcement></div>
+
+      <div class="card" data-register-card>
+        <form data-register-form autocomplete="off">
+          <label class="field">
+            <span class="label">نام کاربری <span class="req">*</span></span>
+            <input class="input" name="username" placeholder="my_username" dir="ltr" required minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_.\-]{2,31}">
+            <span class="hint">۳ تا ۳۲ کاراکتر، فقط حروف انگلیسی، عدد، نقطه، خط تیره و زیرخط. با این نام وارد می‌شوید.</span>
+            <span class="error-text hide" data-error="username"></span>
+          </label>
+
+          <label class="field">
+            <span class="label">نام نمایشی</span>
+            <input class="input" name="display_name" placeholder="مثلاً: رضا محمدی" maxlength="60">
+          </label>
+
+          <label class="field">
+            <span class="label">ایمیل <span class="text-dim text-xs">(اختیاری)</span></span>
+            <input class="input" type="email" name="email" placeholder="you@example.com" dir="ltr">
+          </label>
+
+          <label class="field">
+            <span class="label">رمز عبور <span class="req">*</span></span>
+            <div style="position:relative">
+              <input class="input" type="password" name="password" placeholder="حداقل ۶ کاراکتر" required minlength="6" dir="ltr" style="padding-inline-start:44px">
+              <button type="button" class="btn btn-ghost btn-icon btn-icon-sm" data-toggle-pass style="position:absolute;inset-inline-start:6px;top:50%;transform:translateY(-50%)" aria-label="نمایش رمز"></button>
+            </div>
+            <div class="strength-meter"><i data-strength></i></div>
+            <span class="hint" data-strength-text>قدرت رمز عبور: —</span>
+          </label>
+
+          <label class="field">
+            <span class="label">تکرار رمز عبور <span class="req">*</span></span>
+            <input class="input" type="password" name="password2" placeholder="رمز عبور را دوباره وارد کنید" required dir="ltr">
+            <span class="error-text hide" data-error="password2"></span>
+          </label>
+
+          <label class="checkbox mb-3"><input type="checkbox" name="terms" required> <span><a href="/terms">قوانین و شرایط استفاده</a> را می‌پذیرم</span></label>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit"><span data-icon="rocket" data-size="18"></span> ساخت حساب رایگان</button>
+        </form>
+      </div>
+
+      <p class="text-center text-sm mt-3">حساب دارید؟ <a href="/login">وارد شوید</a></p>
+      <p class="text-center text-sm text-dim"><a href="/">← بازگشت به صفحه اصلی</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="/assets/js/common.js"></script>
+<script>
+(function () {
+  const { api, toast, qs, qsa, icon, loadSiteConfig } = window.LK;
+  const COLORS = ['#ef4444', '#f59e0b', '#eab308', '#10b981', '#06b6d4'];
+  const LABELS = ['خیلی ضعیف', 'ضعیف', 'متوسط', 'خوب', 'قوی'];
+
+  function strength(pw) {
+    let score = 0;
+    if (pw.length >= 6) score++;
+    if (pw.length >= 10) score++;
+    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+    if (/\d/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    return Math.min(5, score);
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const form = qs('[data-register-form]');
+    const year = qs('[data-year]'); if (year) year.textContent = new Intl.DateTimeFormat('fa-IR', { year: 'numeric' }).format(new Date());
+    qsa('[data-toggle-pass]').forEach((b) => b.addEventListener('click', () => {
+      const input = b.parentElement.querySelector('input');
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      b.innerHTML = icon(show ? 'x' : 'eye', 17);
+    }));
+
+    form.elements.password.addEventListener('input', () => {
+      const s = strength(form.elements.password.value);
+      const bar = qs('[data-strength]');
+      bar.style.width = (s * 20) + '%';
+      bar.style.background = COLORS[Math.max(0, s - 1)] || 'transparent';
+      qs('[data-strength-text]').textContent = form.elements.password.value ? 'قدرت رمز عبور: ' + LABELS[Math.max(0, s - 1)] : 'قدرت رمز عبور: —';
+    });
+
+    let allowRegistration = true;
+    try {
+      const cfg = await loadSiteConfig();
+      window.LK.showAnnouncement(cfg);
+      allowRegistration = cfg.site?.allow_registration !== false;
+      if (cfg.site?.name) document.title = `ثبت‌نام | ${cfg.site.name}`;
+    } catch { /* ignore */ }
+
+    if (!allowRegistration) {
+      qs('[data-register-card]').innerHTML = `<div class="empty">${icon('lock', 44)}<h4>ثبت‌نام غیرفعال است</h4><p class="text-sm">مدیر سامانه فعلاً ثبت‌نام کاربران جدید را بسته است. لطفاً بعداً مراجعه کنید.</p><a class="btn btn-outline" href="/login">ورود به حساب</a></div>`;
+      return;
+    }
+
+    try {
+      const me = await api('/api/auth/me');
+      if (me.user) location.href = '/dashboard';
+    } catch { /* ignore */ }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = qs('button[type=submit]', form);
+      qsa('[data-error]').forEach((el) => { el.classList.add('hide'); el.textContent = ''; });
+      if (form.elements.password.value !== form.elements.password2.value) {
+        const err = qs('[data-error="password2"]');
+        err.textContent = 'رمز عبور و تکرار آن یکسان نیستند.';
+        err.classList.remove('hide');
+        return;
+      }
+      if (!/^[A-Za-z0-9][A-Za-z0-9_.\-]{2,31}$/.test(form.elements.username.value.trim())) {
+        const err = qs('[data-error="username"]');
+        err.textContent = 'نام کاربری باید ۳ تا ۳۲ کاراکتر انگلیسی باشد و با حرف یا عدد شروع شود.';
+        err.classList.remove('hide');
+        return;
+      }
+      LK.btnLoading(btn, true);
+      try {
+        const res = await api('/api/auth/register', {
+          method: 'POST',
+          body: {
+            username: form.elements.username.value.trim(),
+            display_name: form.elements.display_name.value.trim(),
+            email: form.elements.email.value.trim(),
+            password: form.elements.password.value,
+          },
+        });
+        toast('حساب شما ساخته شد! در حال انتقال به داشبورد...', 'ok');
+        const redirect = new URLSearchParams(location.search).get('redirect');
+        setTimeout(() => { location.href = redirect || '/dashboard'; }, 700);
+      } catch (err) {
+        toast(err.message, 'err');
+        const field = /نام کاربری/.test(err.message) ? 'username' : null;
+        if (field) { const el = qs(`[data-error="${field}"]`); el.textContent = err.message; el.classList.remove('hide'); }
+        LK.btnLoading(btn, false);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

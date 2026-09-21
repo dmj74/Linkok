@@ -1,0 +1,14 @@
+# وابستگی‌ها
+node_modules/
+
+# داده‌های اجرا (دیتابیس، کلید امضا و فایل‌های آپلودشده)
+data/
+uploads/
+
+# فایل‌های موقت
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+tmp/

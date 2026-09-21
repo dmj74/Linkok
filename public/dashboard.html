@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>داشبورد | لینکوک</title>
+<meta name="description" content="داشبورد کاربری لینکوک — مدیریت لینک‌های کوتاه، فایل‌ها، دامنه‌ها و بیو لینک">
+<meta name="theme-color" content="#070b18">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+<div class="app-shell">
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <!-- ============================ سایدبار ============================ -->
+  <aside class="sidebar" data-sidebar>
+    <div class="sidebar-head">
+      <a class="logo" href="/">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg>
+        </span>
+        <span>لینکوک</span>
+      </a>
+      <button class="btn btn-ghost btn-icon" data-sidebar-close aria-label="بستن منو"><span data-icon="x" data-size="18"></span></button>
+    </div>
+
+    <nav class="side-nav" aria-label="منوی داشبورد">
+      <div class="side-group-label">پنل کاربری</div>
+      <button class="side-item active" data-tab="overview"><span data-icon="home" data-size="19"></span> نمای کلی</button>
+      <button class="side-item" data-tab="links"><span data-icon="link" data-size="19"></span> لینک‌های من <span class="badge badge-brand" data-count="links" style="margin-inline-start:auto">۰</span></button>
+      <button class="side-item" data-tab="files"><span data-icon="file" data-size="19"></span> فایل‌های من <span class="badge badge-brand" data-count="files" style="margin-inline-start:auto">۰</span></button>
+      <button class="side-item" data-tab="domains"><span data-icon="domain" data-size="19"></span> دامنه‌های اختصاصی</button>
+      <button class="side-item" data-tab="bio"><span data-icon="bio" data-size="19"></span> بیو لینک</button>
+      <button class="side-item" data-tab="analytics"><span data-icon="chart" data-size="19"></span> آمار و تحلیل</button>
+      <div class="side-group-label">تنظیمات</div>
+      <button class="side-item" data-tab="settings"><span data-icon="settings" data-size="19"></span> تنظیمات حساب</button>
+      <a class="side-item" href="/" target="_blank" rel="noopener"><span data-icon="globe" data-size="19"></span> مشاهده سایت</a>
+      <button class="side-item" data-action="logout"><span data-icon="logout" data-size="19"></span> خروج از حساب</button>
+    </nav>
+
+    <div class="side-foot">
+      <div class="panel" data-plan-box>
+        <div class="flex between mb-1">
+          <b class="text-sm" data-plan-name>پلن رایگان</b>
+          <span class="badge badge-brand" data-plan-badge>free</span>
+        </div>
+        <div class="text-xs text-dim mb-1">سهمیه لینک</div>
+        <div class="progress mb-2" style="margin-top:0"><i data-usage="links" style="width:0%"></i></div>
+        <div class="text-xs text-dim mb-1">سهمیه فایل</div>
+        <div class="progress"><i data-usage="files" style="width:0%"></i></div>
+        <a class="btn btn-soft btn-sm btn-block mt-2" href="/pricing">ارتقای پلن</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================ بدنه ============================ -->
+  <div class="app-main">
+    <header class="app-topbar">
+      <div class="flex" style="min-width:0">
+        <button class="btn btn-ghost btn-icon" data-sidebar-open aria-label="منو"><span data-icon="menu" data-size="20"></span></button>
+        <div style="min-width:0">
+          <h1 class="mb-0 truncate" style="font-size:1.05rem" data-page-title>نمای کلی</h1>
+          <span class="text-xs text-dim truncate" data-page-sub>خلاصه وضعیت حساب شما</span>
+        </div>
+      </div>
+      <div class="flex" style="gap:8px">
+        <button class="btn btn-primary btn-sm" data-action="new-link"><span data-icon="plus" data-size="16"></span> <span class="hide-sm">لینک جدید</span></button>
+        <button class="btn btn-outline btn-icon" data-action="upload-file" title="آپلود فایل"><span data-icon="upload" data-size="18"></span></button>
+        <button class="theme-toggle" data-theme-toggle aria-label="تغییر تم"></button>
+        <div style="position:relative">
+          <button class="user-chip" data-dropdown="user" aria-label="حساب کاربری">
+            <span data-user-avatar></span>
+            <span class="text-sm strong truncate" data-user-name style="max-width:110px">کاربر</span>
+          </button>
+          <div class="dropdown hide" data-dropdown-menu="user">
+            <div style="padding:8px 10px 10px">
+              <b class="text-sm" data-user-name-2>کاربر</b>
+              <div class="text-xs text-dim" data-user-username>@user</div>
+            </div>
+            <div class="sep"></div>
+            <button data-tab="settings"><span data-icon="settings" data-size="17"></span> تنظیمات حساب</button>
+            <button data-tab="bio"><span data-icon="bio" data-size="17"></span> بیو لینک من</button>
+            <a href="/" target="_blank" rel="noopener"><span data-icon="globe" data-size="17"></span> مشاهده سایت</a>
+            <div class="sep"></div>
+            <button data-action="logout" style="color:var(--danger)"><span data-icon="logout" data-size="17"></span> خروج</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-content">
+      <div data-announcement></div>
+      <noscript><div class="card">برای استفاده از داشبورد لطفاً جاوااسکریپت مرورگر را فعال کنید.</div></noscript>
+
+      <!-- ============================ نمای کلی ============================ -->
+      <section data-panel="overview" hidden>
+        <div class="grid g-4 mb-3" data-overview-stats></div>
+        <div class="grid" style="grid-template-columns:1.6fr 1fr;gap:18px" data-overview-grid>
+          <div class="card">
+            <div class="card-head">
+              <div><h3 class="card-title"><span data-icon="chartLine" data-size="19"></span> کلیک‌های ۳۰ روز گذشته</h3><p class="card-sub" data-clicks-summary>—</p></div>
+              <div class="btn-group">
+                <button class="active" data-range="7">۷ روز</button>
+                <button data-range="30">۳۰ روز</button>
+                <button data-range="90">۹۰ روز</button>
+              </div>
+            </div>
+            <div data-chart-clicks style="min-height:250px"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 class="card-title"><span data-icon="bolt" data-size="19"></span> دسترسی سریع</h3></div>
+            <div class="flex-col">
+              <button class="btn btn-primary btn-block" data-action="new-link"><span data-icon="plus" data-size="17"></span> ساخت لینک کوتاه</button>
+              <button class="btn btn-outline btn-block" data-action="upload-file"><span data-icon="upload" data-size="17"></span> آپلود فایل و ساخت لینک</button>
+              <button class="btn btn-outline btn-block" data-tab="bio"><span data-icon="bio" data-size="17"></span> ویرایش بیو لینک</button>
+              <button class="btn btn-outline btn-block" data-tab="domains"><span data-icon="domain" data-size="17"></span> افزودن دامنه اختصاصی</button>
+            </div>
+            <div class="divider"></div>
+            <div data-bio-mini></div>
+          </div>
+        </div>
+        <div class="grid g-2 mt-3">
+          <div class="card">
+            <div class="card-head"><h3 class="card-title"><span data-icon="link" data-size="19"></span> جدیدترین لینک‌ها</h3><button class="btn btn-ghost btn-sm" data-tab="links">همه لینک‌ها</button></div>
+            <div class="table-wrap"><table class="table"><thead><tr><th>لینک کوتاه</th><th>مقصد</th><th>کلیک</th></tr></thead><tbody data-recent-links></tbody></table></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 class="card-title"><span data-icon="fire" data-size="19"></span> پربازدیدترین لینک‌ها</h3></div>
+            <div data-top-links></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ لینک‌ها ============================ -->
+      <section data-panel="links" hidden>
+        <div class="card mb-3">
+          <div class="row-between">
+            <div class="flex wrap" style="gap:10px">
+              <div style="position:relative">
+                <input class="input" data-links-search placeholder="جستجو در لینک‌ها، مقصد یا برچسب..." style="min-width:250px;padding-inline-start:38px">
+                <span style="position:absolute;inset-inline-start:12px;top:50%;transform:translateY(-50%);color:var(--text-dim)" data-icon="search" data-size="17"></span>
+              </div>
+              <select class="select" data-links-status style="width:auto">
+                <option value="">همه وضعیت‌ها</option>
+                <option value="active">فعال</option>
+                <option value="inactive">غیرفعال</option>
+                <option value="expired">منقضی‌شده</option>
+                <option value="finished">سقف کلیک پر شده</option>
+              </select>
+              <select class="select" data-links-sort style="width:auto">
+                <option value="newest">جدیدترین</option>
+                <option value="oldest">قدیمی‌ترین</option>
+                <option value="clicks">بیشترین کلیک</option>
+                <option value="title">عنوان (الفبا)</option>
+              </select>
+              <select class="select" data-links-domain style="width:auto"><option value="">همه دامنه‌ها</option></select>
+            </div>
+            <div class="flex wrap" style="gap:8px">
+              <button class="btn btn-outline btn-sm" data-action="bulk-links"><span data-icon="layers" data-size="16"></span> افزودن گروهی</button>
+              <a class="btn btn-outline btn-sm" href="/api/links/export/csv"><span data-icon="download" data-size="16"></span> خروجی CSV</a>
+              <button class="btn btn-primary btn-sm" data-action="new-link"><span data-icon="plus" data-size="16"></span> لینک جدید</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid g-3 mb-3" data-links-summary></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>لینک کوتاه</th><th>مقصد</th><th>عنوان / برچسب</th><th>کلیک</th><th>وضعیت</th><th>تاریخ</th><th></th></tr></thead>
+            <tbody data-links-body></tbody>
+          </table>
+        </div>
+        <div class="pagination" data-links-pagination></div>
+      </section>
+
+      <!-- ============================ فایل‌ها ============================ -->
+      <section data-panel="files" hidden>
+        <div class="card mb-3">
+          <div class="card-head">
+            <div><h3 class="card-title"><span data-icon="upload" data-size="19"></span> آپلود فایل و تبدیل به لینک</h3><p class="card-sub">فایل را انتخاب کنید؛ بلافاصله لینک دانلود ساخته می‌شود.</p></div>
+          </div>
+          <div class="dropzone" data-dropzone>
+            <div class="dz-icon"><span data-icon="attach" data-size="30"></span></div>
+            <b>فایل‌ها را بکشید و رها کنید یا کلیک کنید</b>
+            <p class="text-sm text-dim mb-0 mt-1">حجم مجاز تا <span data-max-upload>۵۰</span> مگابایت برای هر فایل · تا ۲۵ فایل در هر بار</p>
+            <input type="file" multiple class="hide" data-file-input>
+          </div>
+          <div class="row mt-3" style="gap:14px">
+            <label class="field mb-0" style="flex:1;min-width:180px">
+              <span class="label">رمز عبور فایل (اختیاری)</span>
+              <input class="input" type="password" data-upload-password placeholder="خالی = بدون رمز" dir="ltr">
+            </label>
+            <label class="field mb-0" style="flex:1;min-width:180px">
+              <span class="label">تاریخ انقضا (اختیاری)</span>
+              <input class="input" type="date" data-upload-expiry>
+            </label>
+          </div>
+          <div class="progress hide mt-2" data-progress><i></i></div>
+          <div class="flex-col mt-2" data-upload-results style="gap:8px"></div>
+        </div>
+
+        <div class="grid g-3 mb-3" data-files-summary></div>
+        <div class="card">
+          <div class="row-between mb-2">
+            <input class="input" data-files-search placeholder="جستجوی نام فایل..." style="max-width:300px">
+            <a class="btn btn-outline btn-sm" href="/api/files/export/csv"><span data-icon="download" data-size="16"></span> خروجی CSV</a>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>فایل</th><th>لینک</th><th>حجم</th><th>دانلود</th><th>وضعیت</th><th>تاریخ</th><th></th></tr></thead>
+              <tbody data-files-body></tbody>
+            </table>
+          </div>
+          <div class="pagination" data-files-pagination></div>
+        </div>
+      </section>
+
+      <!-- ============================ دامنه‌ها ============================ -->
+      <section data-panel="domains" hidden>
+        <div class="card mb-3">
+          <div class="card-head">
+            <div><h3 class="card-title"><span data-icon="domain" data-size="19"></span> افزودن دامنه اختصاصی</h3><p class="card-sub" data-domain-hint>دامنه یا زیر‌دامنه خود را وارد کنید و رکورد DNS را ثبت کنید.</p></div>
+          </div>
+          <form data-domain-form class="row" style="gap:12px;align-items:flex-start">
+            <label class="field mb-0" style="flex:1;min-width:240px">
+              <input class="input" name="hostname" placeholder="go.yourdomain.com" dir="ltr" required>
+              <span class="hint">بدون http:// و بدون اسلش. مثال: link.example.com</span>
+            </label>
+            <button class="btn btn-primary" type="submit"><span data-icon="plus" data-size="17"></span> افزودن دامنه</button>
+          </form>
+        </div>
+        <div class="flex-col" data-domains-list style="gap:14px"></div>
+      </section>
+
+      <!-- ============================ بیو لینک ============================ -->
+      <section data-panel="bio" hidden>
+        <div data-bio-root></div>
+      </section>
+
+      <!-- ============================ آمار ============================ -->
+      <section data-panel="analytics" hidden>
+        <div class="card mb-3">
+          <div class="row-between">
+            <div><h3 class="card-title"><span data-icon="chart" data-size="19"></span> تحلیل کلیک‌ها</h3><p class="card-sub">عملکرد همه لینک‌های شما در بازه انتخابی</p></div>
+            <div class="btn-group">
+              <button data-range="7">۷ روز</button>
+              <button class="active" data-range="30">۳۰ روز</button>
+              <button data-range="90">۹۰ روز</button>
+              <button data-range="365">۱ سال</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid g-4 mb-3" data-analytics-stats></div>
+        <div class="card mb-3"><div data-chart-trend style="min-height:270px"></div></div>
+        <div class="grid g-2 mb-3">
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="chart" data-size="18"></span> تفکیک دستگاه</h3><div data-chart-device></div></div>
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="globe" data-size="18"></span> مرورگرها</h3><div data-chart-browser></div></div>
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="layers" data-size="18"></span> منبع ورود</h3><div data-chart-referrer></div></div>
+          <div class="card"><h3 class="card-title mb-2"><span data-icon="clock" data-size="18"></span> ساعت‌های پرکلیک</h3><div data-chart-hours></div></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3 class="card-title"><span data-icon="fire" data-size="18"></span> برترین لینک‌ها</h3></div>
+          <div class="table-wrap"><table class="table"><thead><tr><th>لینک</th><th>عنوان</th><th>کلیک کل</th><th>کاربر یکتا</th><th></th></tr></thead><tbody data-analytics-top></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ============================ تنظیمات ============================ -->
+      <section data-panel="settings" hidden>
+        <div class="grid g-2">
+          <div class="card">
+            <div class="card-head"><h3 class="card-title"><span data-icon="users" data-size="18"></span> پروفایل</h3></div>
+            <div class="flex mb-3">
+              <div data-settings-avatar></div>
+              <div>
+                <b data-settings-username>@user</b>
+                <div class="text-xs text-dim">نام کاربری قابل تغییر نیست</div>
+              </div>
+            </div>
+            <form data-profile-form>
+              <label class="field"><span class="label">نام نمایشی</span><input class="input" name="display_name" maxlength="60"></label>
+              <label class="field"><span class="label">ایمیل</span><input class="input" type="email" name="email" dir="ltr"></label>
+              <label class="field"><span class="label">درباره من</span><textarea class="textarea" name="bio" maxlength="300"></textarea></label>
+              <label class="field"><span class="label">تصویر پروفایل</span>
+                <input class="input" type="file" accept="image/*" data-profile-avatar>
+                <span class="hint">حداکثر ۴ مگابایت — PNG، JPG یا WEBP</span>
+              </label>
+              <button class="btn btn-primary" type="submit"><span data-icon="save" data-size="17"></span> ذخیره پروفایل</button>
+            </form>
+          </div>
+
+          <div class="flex-col" style="gap:18px">
+            <div class="card">
+              <div class="card-head"><h3 class="card-title"><span data-icon="lock" data-size="18"></span> تغییر رمز عبور</h3></div>
+              <form data-password-form>
+                <label class="field"><span class="label">رمز عبور فعلی</span><input class="input" type="password" name="current_password" required dir="ltr"></label>
+                <label class="field"><span class="label">رمز عبور جدید</span><input class="input" type="password" name="new_password" minlength="6" required dir="ltr"><span class="hint">حداقل ۶ کاراکتر</span></label>
+                <button class="btn btn-primary" type="submit"><span data-icon="shield" data-size="17"></span> تغییر رمز</button>
+              </form>
+            </div>
+            <div class="card">
+              <div class="card-head">
+                <h3 class="card-title"><span data-icon="key" data-size="18"></span> کلید API</h3>
+                <button class="btn btn-soft btn-sm" data-action="regen-key"><span data-icon="refresh" data-size="15"></span> ساخت کلید جدید</button>
+              </div>
+              <div class="code-block" data-api-key style="word-break:break-all">—</div>
+              <div class="flex wrap mt-2" style="gap:8px">
+                <button class="btn btn-outline btn-sm" data-action="copy-key"><span data-icon="copy" data-size="15"></span> کپی کلید</button>
+              </div>
+              <p class="hint mt-2 mb-0">نمونه استفاده:</p>
+              <div class="code-block" style="margin-top:6px">curl -X POST <span class="c-val">{{base}}/api/links</span> \<br>&nbsp;&nbsp;-H "Authorization: Bearer <span class="c-key">YOUR_API_KEY</span>" \<br>&nbsp;&nbsp;-H "Content-Type: application/json" \<br>&nbsp;&nbsp;-d '{"url":"https://example.com","alias":"my-link"}'</div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3 class="card-title"><span data-icon="info" data-size="18"></span> حساب من</h3></div>
+              <div data-account-info></div>
+              <div class="flex wrap mt-3" style="gap:10px">
+                <button class="btn btn-outline btn-sm" data-action="logout"><span data-icon="logout" data-size="15"></span> خروج</button>
+                <button class="btn btn-danger btn-sm" data-action="logout-all"><span data-icon="shield" data-size="15"></span> خروج از همه دستگاه‌ها</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/charts.js"></script>
+<script src="/assets/js/dashboard.js"></script>
+<script src="/assets/js/bio.js"></script>
+</body>
+</html>
