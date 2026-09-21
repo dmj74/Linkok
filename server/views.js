@@ -135,12 +135,12 @@ function bioHtml({ page, blocks, theme, views, siteName, customDomain, origin = 
   .wrap{position:relative;z-index:1;max-width:${Number(t.pageWidth) || 620}px;text-align:${t.headerAlign || 'center'}}
   .avatar{width:112px;height:112px;border-radius:${avatarRadius};object-fit:cover;border:3px solid rgba(255,255,255,.65);box-shadow:0 14px 40px -14px rgba(2,6,23,.7);background:rgba(255,255,255,.25);margin:0 auto 16px;display:block}
   .avatar-fallback{width:112px;height:112px;border-radius:${avatarRadius};background:rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;margin:0 auto 16px;border:3px solid rgba(255,255,255,.65)}
-  .verified{display:inline-flex;align-items:center;gap:4px;font-size:12px;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:999px;margin-bottom:10px;backdrop-filter:blur(6px)}
+  .verified{display:inline-flex;align-items:center;gap:4px;font-size:12px;background:rgba(255,255,255,.24);padding:3px 10px;border-radius:999px;margin-bottom:10px;backdrop-filter:blur(6px)}
   h1{font-size:24px;margin:0 0 6px;font-weight:800;letter-spacing:-.3px}
-  .headline{font-size:15px;opacity:.92;margin:0 0 12px;color:${t.subtitleColor || 'inherit'}}
-  .bio{font-size:14.5px;line-height:1.9;opacity:.95;margin:0 auto 20px;max-width:520px;white-space:pre-wrap}
-  .stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;font-size:12.5px;opacity:.9}
-  .stats span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;display:inline-flex;gap:6px;align-items:center;backdrop-filter:blur(6px)}
+  .headline{font-size:15px;opacity:.97;margin:0 0 12px;color:${t.subtitleColor || 'inherit'}}
+  .bio{font-size:14.5px;line-height:1.9;opacity:.99;margin:0 auto 20px;max-width:540px;white-space:pre-wrap;text-wrap:pretty}
+  .stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;font-size:12.5px;opacity:1}
+  .stats span{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.32);padding:5px 12px;border-radius:999px;display:inline-flex;gap:6px;align-items:center;backdrop-filter:blur(6px)}
   .blocks{display:flex;flex-direction:column;gap:12px;margin-top:6px}
   .bio-btn{width:100%;${btnBase}${shadow}animation:bioIn .5s ease both}
   .bio-btn:hover{filter:brightness(1.05);transform:translateY(-3px) scale(1.01)}
@@ -149,9 +149,10 @@ function bioHtml({ page, blocks, theme, views, siteName, customDomain, origin = 
   .bio-text{margin:4px 0;font-size:14px;opacity:.95;animation:bioIn .5s ease both}
   .bio-heading{margin:10px 0 2px;font-size:17px;font-weight:700;animation:bioIn .5s ease both}
   .socials{display:${socialStyle};grid-template-columns:${socialCols};gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
-  .social-btn{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:${t.textColor || '#fff'};border-radius:${socialStyle === 'row' ? '999px' : '16px'};backdrop-filter:blur(8px);transition:.2s}
+  .social-btn{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.24);border:1px solid rgba(255,255,255,.42);color:${t.textColor || '#fff'};border-radius:${socialStyle === 'row' ? '999px' : '16px'};backdrop-filter:blur(8px);transition:.2s}
   .social-btn:hover{background:rgba(255,255,255,.34);transform:translateY(-3px) rotate(-4deg)}
-  .footer{margin-top:34px;font-size:12px;opacity:.8;text-align:center}
+  .footer{margin-top:34px;font-size:12.3px;opacity:.95;text-align:center}
+  .footer a{color:inherit}
   .footer a{font-weight:700;border-bottom:1px dashed currentColor}
   @keyframes bioIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @media (max-width:480px){.avatar,.avatar-fallback{width:92px;height:92px}h1{font-size:21px}.wrap{padding:26px 14px 40px}}

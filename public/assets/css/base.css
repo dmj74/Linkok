@@ -302,7 +302,7 @@ table.table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:620px}
 .bar-item{display:flex;align-items:center;gap:10px;font-size:.86rem}
 .bar-item .bar-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-soft)}
 .bar-item .bar-track{width:110px;height:8px;background:var(--surface-3);border-radius:6px;overflow:hidden;flex-shrink:0}
-.bar-item .bar-fill{height:100%;background:var(--brand-grad);border-radius:6px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.bar-item .bar-fill{display:block;min-width:3px;height:100%;background:var(--brand-grad);border-radius:6px;transition:width .7s cubic-bezier(.4,0,.2,1)}
 .bar-item .bar-value{font-weight:700;font-size:.82rem;min-width:42px;text-align:left}
 
 /* --------------------------------- فایل‌ها ----------------------------------- */
